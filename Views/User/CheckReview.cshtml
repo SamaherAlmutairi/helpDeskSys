@@ -1,0 +1,229 @@
+﻿@inject IHttpContextAccessor Accessor
+@model HelpDesk.ViewModels.TicketsViewModel
+
+@{
+    ViewData["Title"] = "Ticket review";
+}
+
+<head>
+    <link rel="stylesheet" href="/css/reviewTicket.css" />
+    <style>
+        button[type=button] {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        body {
+            background-color: #f1f1f1;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 10%;
+            background-color:  #333	;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar h4 {
+            margin-bottom: 20px;
+            font-size: 25px;
+            text-align: center;
+                                    color: #fff;
+
+        }
+
+        .sidebar-button {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+              color: #fff;
+            background-color:  #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-logout {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type=submit] {
+            display: block;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            padding: 10px;
+            width: 150px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            background-color:  #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .messages {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-radius: 5px;
+            max-width: 400px;
+            margin: 0 auto;
+            width: 100%;
+            height: 70%;
+            overflow: auto;
+        }
+
+        .chat-message {
+            width: 100%;
+            background-color: #fff;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .sender-name {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .message-content {
+            margin-bottom: 5px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+
+        .review{
+            margin-top: 30px;
+            margin-right: 150px
+        }
+
+        .timestamp{
+            font-size: 12px;
+            color: #888;
+        }
+
+        .chat-container{
+            position: relative;
+            min-height: 80vh;
+            max-height: 80vh;
+            width: 40vw;
+            margin-top: 30px;
+        }
+
+        .newMessage{
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
+</head>
+
+    <div class="container">
+        <div class="sidebar">
+             <!--   <h4>@Accessor.HttpContext.Session.GetString("Name") @Accessor.HttpContext.Session.GetString("Surname")</h4> -->
+         <h4>Samaher</h4>
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("NewTicket", "User")'">New Ticket</button>
+            <hr />
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("Index", "User")'">My Tickets</button>
+            <hr />
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("ClosedTickets", "User")'">Closed Tickets</button>
+            <hr />
+            <button type="button" class="button-logout" onclick="location.href='@Url.Action("Login", "User")'">Log out</button>
+        </div>
+        <div class="review">
+            <form asp-route-id="@Model.TicketId" method="post">
+                <div>
+                    <h2>Ticket #@Model.TicketId Review</h2>
+                    <div>
+                        <label asp-for="Subject" class="form-label">Subject</label>
+                        <input asp-for="Subject" class="form-control" disabled value="@Model.Subject" />
+                    </div>
+                    <div>
+                        <label asp-for="Status" class="form-label"></label>
+                        <input asp-for="Status" class="form-control" disabled value="@Model.Status"/>
+                    </div>
+                    <div>
+                        <label asp-for="Description" class="form-label">Description</label>
+                        <textarea asp-for="Description" class="form-control" value="@Model.Description" style="resize:none" rows="8" cols="50" readonly></textarea>
+                    </div>
+                    <hr />
+                    <div>
+                        <label asp-for="LastChange" class="form-label">Last change</label>
+                        @if(Model.LastChange.HasValue){
+                            <input asp-for="LastChange" class="form-control" disabled value="@Model.LastChange.Value.ToString("yyyy-MM-dd HH:mm")" />
+                        }
+                        else{
+                        <input asp-for="LastChange" class="form-control" disabled />
+                        }
+                    </div>
+                    <div>
+                        <label asp-for="ExpectedHours" class="form-label">Hours expected to resolve</label>
+                        <input asp-for="ExpectedHours" class="form-control" disabled value="@Model.ExpectedHours" />
+                    </div>
+                </div>
+            </form>
+            <div class="error-message">@ViewData["Error"]</div>
+        </div>
+        <div class="chat-container">
+        @if (Model.Messages != null)
+        {
+            <div class="messages">
+                @foreach (var message in Model.Messages)
+                {
+                    <div class="chat-message">
+                        <div class="sender-name">
+                            <a>@message.Sender</a>
+                            <a class="timestamp">@message.DateTime</a>
+                        </div>
+                        <hr>
+                        <div class="message-content">
+                            <a>@message.MessageContent</a>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+        <form asp-action="SendMessage" asp-route-ticketId="@Model.TicketId" method="post">
+            <div class="newMessage">
+                <div>
+                    <label asp-for="NewMessage" class="form-label">New message</label>
+                    <textarea asp-for="NewMessage" class="form-control" style="resize:none" rows="5" cols="50"></textarea>
+                </div>
+                <div>
+                    <button type="submit">Send</button>
+                </div>
+            </div>
+        </form>
+        </div>
+    </div>

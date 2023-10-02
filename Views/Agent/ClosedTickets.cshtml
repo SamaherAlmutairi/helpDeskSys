@@ -1,0 +1,246 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+@model HelpDesk.ViewModels.ListTicketsViewModel
+
+@{
+    ViewData["Title"] = "Tickets";
+}
+
+<head>
+    <link rel="stylesheet" href="/css/index.css" />
+    <style>
+        button[type=button] {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        body {
+ background-color: #f1f1f1;
+                height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    padding-left: 51px;           }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 10%;
+            background-color:  #333;
+            padding: 20px;
+            box-sizing: border-box;
+            
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar h4 {
+            margin-bottom: 20px;
+            font-size: 25px;
+            text-align: center;
+                                    color: #fff;
+
+        }
+
+        .sidebar-button {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            background-color:  #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-logout {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-review {
+            display: block;
+            margin-bottom: 10px;
+            padding: 5px;
+            width: 100%;
+            font-size: 16px;
+            text-align: center;
+            color: #fff;
+            background-color: darkcyan;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type=submit] {
+            margin-bottom: 10px;
+            margin-top: 10px;
+            padding: 5px;
+            width: 150px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            background-color:  #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .searchFilter {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .mainSite {
+            width: 1500px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+                <!--   <h4>@Accessor.HttpContext.Session.GetString("Name") @Accessor.HttpContext.Session.GetString("Surname")</h4> -->
+<h4> Eng.Samaher </h4>
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("Index", "Agent")'">Dashboard</button>
+            <hr />
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("Tickets", "Agent")'">Tickets</button>
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("ClosedTickets", "Agent")'">Closed Tickets</button>
+            <hr />
+           <!-- <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("KnowledgeBase", "Agent")'">Knowledge base</button> -->
+            <hr />
+            <button type="button" class="button-logout" onclick="location.href='@Url.Action("Login", "Agent")'">Log out</button>
+        </div>
+        <div class="mainSite">
+            <h1>Tickets</h1>
+            <br />
+
+            @if (Model != null)
+            {
+                <div class="searchFilter">
+                    <div>
+                        <form method="get" asp-action="Search">
+                            <label class="form-label">Subject</label>
+                            <input type="text" name="query" />
+                            <input type="hidden" name="source" value="ClosedTickets" />
+                            <button type="submit">Search</button>
+                        </form>
+                    </div>
+                    <div>
+                        <label for="priorityFilter">Priority:</label>
+                        <select id="priorityFilter" onchange="applyFilters()">
+                            <option value="">All</option>
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+
+                        <label for="categoryFilter">Category:</label>
+                        <select id="categoryFilter" onchange="applyFilters()">
+                            <option value="">All</option>
+                            <option value="Hardware problem">Hardware problem</option>
+                            <option value="Software problem">Software problem</option>
+                            <option value="Network problem">Network problem</option>
+                            <option value="Account problem">Account problem</option>
+                            <option value="General">General</option>
+                        </select>
+                    </div>
+                </div>
+                <table class="table table-sm table-striped table-hover">
+                    <thead>
+                        <tr>
+                            <th>
+                                <a>Ticket id</a>
+                            </th>
+                            <th>
+                                <a>Subject</a>
+                            </th>
+                            <th>
+                                <a>Created</a>
+                            </th>
+                            <th>
+                                <a>Last change</a>
+                            </th>
+                            <th>
+                                <a>User</a>
+                            </th>
+                            <th>
+                                <a>Priority</a>
+                            </th>
+                            <th>
+                                <a>Status</a>
+                            </th>
+                            <th>
+                                <a>Category</a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var ticket in Model.Tickets)
+                        {
+                            <tr class="ticket-row" data-priority="@ticket.Priority" data-category="@ticket.Category">
+                                <td class="text-center">#@ticket.TicketId</td>
+                                <td class="text-center">@ticket.Subject</td>
+                                <td class="text-center">@ticket.DateTime</td>
+                                <td class="text-center">@ticket.ExpectedHours</td>
+                                <td class="text-center">@ticket.UserName</td>
+                                <td class="text-center">@ticket.Priority</td>
+                                <td class="text-center">@ticket.Status</td>
+                                <td class="text-center">@ticket.Category</td>
+                                <td>
+                                    <a asp-action="CheckReview"
+                                       asp-route-id="@ticket.TicketId"
+                                       class="button-review" title="Review"><i class="fas fa-edit">Check review</i></a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+            else
+            {
+                <h4>You don't have any closed tickets</h4>
+            }
+        </div>
+    </div>
+</body>
+
+<script>
+    function applyFilters() {
+        var priorityFilter = document.getElementById("priorityFilter").value;
+        var categoryFilter = document.getElementById("categoryFilter").value;
+        var ticketRows = document.getElementsByClassName("ticket-row");
+
+        for (var i = 0; i < ticketRows.length; i++) {
+            var priority = ticketRows[i].getAttribute("data-priority");
+            var category = ticketRows[i].getAttribute("data-category");
+
+            if ((priorityFilter === "" || priority === priorityFilter) &&
+                (categoryFilter === "" || category === categoryFilter)) {
+                ticketRows[i].style.display = "table-row";
+            }
+            else {
+                ticketRows[i].style.display = "none";
+            }
+        }
+    }
+</script>

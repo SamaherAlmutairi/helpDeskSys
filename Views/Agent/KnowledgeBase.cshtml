@@ -1,0 +1,161 @@
+﻿@using Microsoft.AspNetCore.Http
+@inject IHttpContextAccessor Accessor
+@model HelpDesk.ViewModels.ListKnowledgeBaseViewModel
+
+@{
+    ViewData["Title"] = "FAQ";
+}
+
+<head>
+    <link rel="stylesheet" href="/css/index.css" />
+    <style>
+        button[type=button] {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        body {
+  background-color: #f1f1f1;
+                height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    padding-left: 51px;           }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 10%;
+            background-color:   #333	;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar h4 {
+                                    color: #fff;
+
+            margin-bottom: 20px;
+            font-size: 25px;
+            text-align: center;
+        }
+
+        .sidebar-button {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+             color: #fff;
+            background-color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-logout {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-add {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 150px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+              color: #fff;
+            background-color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .title {
+            cursor: pointer;
+            text-decoration: underline;
+        }
+
+        .base {
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+               <!--   <h4>@Accessor.HttpContext.Session.GetString("Name") @Accessor.HttpContext.Session.GetString("Surname")</h4> -->
+<h4> Eng.Samaher </h4>
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("Index", "Agent")'">Dashboard</button>
+            <hr />
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("Tickets", "Agent")'">Tickets</button>
+            <hr />
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("ClosedTickets", "Agent")'">Closed Tickets</button>
+            <hr />
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("KnowledgeBase", "Agent")'">Knowledge base</button>
+            <hr />
+            <button type="button" class="button-logout" onclick="location.href='@Url.Action("Login", "Agent")'">Log out</button>
+        </div>
+        <div>
+            <div class="base">
+                <div>
+                    <h3>Categories:</h3>
+                    <select onchange="filterByCategory(this.value)">
+                        <option value="0">All</option>
+                        @foreach (var category in Model.categories)
+                        {
+                            <option value="@category">@category</option>
+                        }
+                    </select>
+                </div>          
+                <button type="button" class="button-add" onclick="location.href='@Url.Action("NewKnowledgeBase", "Agent")'">Add new knowledge</button>
+            </div>
+
+            <hr />
+            <ul id="knowledgeBaseList">
+                @foreach (var knowledgeBase in Model.knowledgeBases)
+                {
+                    <li class="knowledgeBaseItem" data-category="@knowledgeBase.Category.Name">
+                        <h4 class="title" onclick="toggleSolution(this)">@knowledgeBase.Title</h4>
+                        <p class="solution" style="display:none">@knowledgeBase.Solution</p>
+                    </li>
+                }
+            </ul>
+        </div>
+    </div>
+</body>
+
+<script>
+    function filterByCategory(categoryName) {
+        $(".knowledgeBaseItem").show();
+
+        if (categoryName !== "0") {
+            $(".knowledgeBaseItem").not("[data-category='" + categoryName + "']").hide();
+        }
+    }
+
+    function toggleSolution(element) {
+        $(element).next(".solution").slideToggle();
+    }
+</script>

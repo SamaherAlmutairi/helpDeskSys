@@ -1,0 +1,38 @@
+﻿.container {
+    height: 100%;
+    display: flex;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 10%;
+    background-color: dodgerblue;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.content {
+    width: 90%;
+    flex-grow: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: grey;
+}
+
+footer {
+    height: 70px;
+    background-color: #ddd;
+}
+
+
+.error-message {
+    font-weight: bold;
+    color: darkred;
+    text-align: center;
+}

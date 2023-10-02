@@ -1,0 +1,145 @@
+﻿@inject IHttpContextAccessor Accessor
+@model HelpDesk.Models.Ticket
+
+@{
+    ViewData["Title"] = "New ticket";
+}
+
+<head>
+    <link rel="stylesheet" href="/css/newTicket.css"/>
+    <style>
+        button[type=button] {
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+
+        body {
+            background-color: #f1f1f1;
+                height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    padding-left: 51px;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 10%;
+            background-color:   #333	;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+
+        .container {
+            display: flex;
+            min-height: 100vh;
+        }
+
+        .sidebar h4 {
+            margin-bottom: 20px;
+            font-size: 25px;
+            text-align: center;
+                        color: #fff;
+
+        }
+
+        .sidebar-button {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            background-color:   #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .button-logout {
+            display: block;
+            margin-bottom: 10px;
+            padding: 10px;
+            width: 100%;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            background-color: red;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        button[type=submit] {
+            display: block;
+            margin-bottom: 10px;
+            margin-top: 10px;
+            padding: 10px;
+            width: 150px;
+            font-size: 16px;
+            font-weight: bold;
+            text-align: center;
+            color: #fff;
+            background-color:  #333;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="sidebar">
+              <!--   <h4>@Accessor.HttpContext.Session.GetString("Name") @Accessor.HttpContext.Session.GetString("Surname")</h4> -->
+         <h4>Samaher</h4>
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("NewTicket", "User")'">New Ticket</button>
+            <hr />
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("Index", "User")'">My Tickets</button>
+             <hr />
+            <button type="button" class="sidebar-button" onclick="location.href='@Url.Action("ClosedTickets", "User")'">Closed Tickets</button>
+            <hr />
+            <button type="button" class="button-logout" onclick="location.href='@Url.Action("Login", "User")'">Log out</button>
+        </div>
+        <div>
+            <form asp-action="NewTicket" method="post">
+                <h2>New Ticket</h2>
+                <div>
+                    <label asp-for="Subject" class="form-label"></label>
+                    <input asp-for="Subject" class="form-control" />
+                </div>
+                  <div>
+                    <label asp-for="PriorityId" class="form-label"></label>
+                    <select class="form-control" asp-for="PriorityId" asp-items="ViewBag.Priorities">
+                        <option disabled selected value="">Department</option>
+                    </select>
+                </div>
+                <div>
+                    <label asp-for="PriorityId" class="form-label"></label>
+                    <select class="form-control" asp-for="PriorityId" asp-items="ViewBag.Priorities">
+                        <option disabled selected value="">Priority</option>
+                    </select>
+                </div>
+                <div>
+                    <label asp-for="CategoryId" class="form-label"></label>
+                    <select class="form-control" asp-for="CategoryId" asp-items="ViewBag.Categories">
+                        <option disabled selected value="">Category</option>
+                    </select>
+                </div>
+                <div>
+                    <label asp-for="Description" class="form-label"></label>
+                    <textarea asp-for="Description" class="form-control" style="resize:none" rows="8" cols="50"></textarea>
+                </div>
+                <div>
+                    <button type="submit">Create Ticket</button>
+                </div>
+            </form>
+            <div class="error-message">@ViewData["Error"]</div>
+        </div>
+    </div>
+</body>

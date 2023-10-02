@@ -1,0 +1,93 @@
+is_global = true
+build_property.TargetFramework = net6.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = true
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = 
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = Linux,macOS,Windows
+build_property.RootNamespace = HelpDesk
+build_property.RootNamespace = HelpDesk
+build_property.ProjectDir = C:\Users\marin\Source\Repos\HelpDesk\HelpDesk\
+build_property.RazorLangVersion = 6.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = C:\Users\marin\Source\Repos\HelpDesk\HelpDesk
+build_property._RazorSourceGeneratorDebug = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Agent/ClosedTickets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcQ2xvc2VkVGlja2V0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Agent/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Agent/KnowledgeBase.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcS25vd2xlZGdlQmFzZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Agent/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcTG9naW4uY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Agent/NewKnowledgeBase.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcTmV3S25vd2xlZGdlQmFzZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Agent/ReviewTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcUmV2aWV3VGlja2V0LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Agent/Tickets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWdlbnRcVGlja2V0cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Home/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Home/Privacy.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Shared/Error.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Shared/_ValidationScriptsPartial.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/User/CheckReview.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDaGVja1Jldmlldy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/User/ClosedTickets.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxDbG9zZWRUaWNrZXRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/User/Index.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxJbmRleC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/User/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxMb2dpbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/User/NewTicket.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcVXNlclxOZXdUaWNrZXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/_ViewImports.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/_ViewStart.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/marin/Source/Repos/HelpDesk/HelpDesk/Views/Shared/_Layout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = b-6v90vukrq2

@@ -1,0 +1,33 @@
+﻿.container {
+    height: 100%;
+    display: flex;
+}
+
+.main{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.content {
+    width: 90%;
+    flex-grow: 1;
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: grey;
+}
+
+.box{
+    width: 200px;
+    padding: 20px;
+    background-color: lightblue;
+    border: 1px solid #ccc;
+}
+
+footer {
+    height: 70px;
+    background-color: #ddd;
+}

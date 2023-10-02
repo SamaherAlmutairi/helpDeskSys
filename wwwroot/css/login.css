@@ -1,0 +1,44 @@
+﻿body {
+    background-color: #f1f1f1;
+    font-family: Arial, sans-serif;
+    align-content: center;
+}
+
+.login-box {
+    background-color: #fff;
+    max-width: 500px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px #aaa;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.container {
+    padding: 16px;
+}
+
+span.psw {
+    float: right;
+    padding-top: 16px;
+}
+
+.error-message {
+    font-weight: bold;
+    color: darkred;
+    text-align: center;
+}
